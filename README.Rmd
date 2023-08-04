@@ -35,8 +35,10 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(clinicalomicsdbR)
-## basic example code
+## basic filtering
 
-clinicalomicsdbR$test("world")
+clinicalomicsdbR$filter(drugs=c("drug_paclitaxel"))$study_list[[1]]
+
+clinicalomicsdbR$hello("World")
 ```
 
