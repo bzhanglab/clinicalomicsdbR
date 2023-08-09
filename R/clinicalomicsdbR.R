@@ -6,9 +6,16 @@ library(R6)
 #' @import R6
 #' @export
 clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
+  #' @field hostname The url of the API to connect to. Only change if you are using a custom service.
   hostname = "http://clinicalomicsdb.zhang-lab.org",
+  #' @field study_list The list of all the studies that are a result of filtering.
   study_list = c(),
-  filter = function(drugs = c(), cancers = c(), partial = TRUE) {
+  #' @description
+  #' filter objects according to the specified drugs and cancers
+  #' @param drugs list or vector containing drugs that studies need to contain at least one of
+  #' @param cancers list of vector of cancer types to consider. Leave empty to consider all cancer types
+  #' @return new clinicalomicsdbR object with the filtered results in `$study_list`
+  filter = function(drugs = c(), cancers = c()) {
     if (length(drugs) == 0) {
       drug_text <- "[]"
     } else {
@@ -51,6 +58,10 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
     print(paste0("Filtered to ", length(self$study_list), " studies."))
     invisible(self)
   },
+  #' @description
+  #' Get download url for a study at specified `study_id`
+  #' @param study_id String of the ID of the study to get the download url of
+  #' @return String of the download url
   get_download_url = function(study_id) {
     req <- request(paste0(self$hostname, "/api/info/", study_id))
     req <- req %>%
@@ -60,7 +71,11 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
     resp_json <- resp %>% resp_body_json()
     return(resp_json$download_url)
   },
-  download = function(study_id, output_dir = "clindb") {
+  #' @description
+  #' Download all files of the studies in `self$study_list`. Use `filter` function first
+  #' @param output_dir Directory to download files to. Default to `clindb`
+  #' @return unmodifed clinicalomicsdbR object
+  download = function(output_dir = "clindb") {
     for (study_id in self$study_list) {
       dl_url <- self$get_download_url(study_id)
       print(paste0("Downloading study ", study_id, " from ", dl_url))
@@ -69,13 +84,21 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
     print(paste0("Downloaded ", length(self$study_list), " studies."))
     invisible(self)
   },
-  download_from_id = function(study_id) {
+  #' @description
+  #' Download all file from `study_id` into `output_dir` directory
+  #' @param study_id String containing the ID of the study to download
+  #' @param output_dir Directory to download files to. Default to `clindb`
+  #' @return unmodifed clinicalomicsdbR object
+  download_from_id = function(study_id, output_dir = "clindb") {
     dl_url <- self$get_download_url(study_id)
     print(paste0("Downloading study ", study_id, " from ", dl_url))
-    download.file(dl_url)
+    download.file(dl_url, paste0(output_dir, "/", study_id))
     print("Done downloading study.")
     invisible(self)
   },
+  #' @description
+  #' Get all files of the studies in `self$study_list` and load into data frame. Use `filter` function first.
+  #' @return list with `study_list` element to display all studies and list `df` with each dataframe in the list 
   dataframe = function() {
     res <- list(study_list = self$study_list, df = list())
     for (study in self$study_list) {
@@ -83,6 +106,10 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
     }
     return(res)
   },
+  #' @description
+  #' Get file from `study_id` and convert into dataframe.
+  #' @param study_id String containing the ID of the study to get dataframe of
+  #' @return data frame containing data of study
   dataframe_from_id = function(study_id) {
     dl_url <- self$get_download_url(study_id)
     print(paste0("Getting dataframe of study ", study_id, " from ", dl_url))
