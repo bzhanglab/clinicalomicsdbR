@@ -25,7 +25,6 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
       }
       drug_text <- substr(drug_text, 1, nchar(drug_text) - 1)
       drug_text <- paste0(drug_text, "]")
-      print(drug_text)
     }
     if (length(cancers) == 0) {
       cancer_text <- "[]"
@@ -36,7 +35,6 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
       }
       cancer_text <- substr(cancer_text, 1, nchar(cancer_text) - 1)
       cancer_text <- paste0(cancer_text, "]")
-      print(cancer_text)
     }
     req <- request(paste0(self$hostname, "/api/filter"))
     req <- req %>%
@@ -54,7 +52,6 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
     resp <- req_perform(req)
     filter_res <- resp %>% resp_body_json()
     self$study_list <- unlist(filter_res$study_list)
-    print(self$study_list)
     print(paste0("Filtered to ", length(self$study_list), " studies."))
     invisible(self)
   },
