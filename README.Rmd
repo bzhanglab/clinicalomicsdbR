@@ -29,14 +29,40 @@ You can install the development version of clinicalomicsdbR from [GitHub](https:
 devtools::install_github("bzhanglab/clinicalomicsdbR")
 ```
 
-## Example
+## Examples
 
-This is a basic example which shows you how to solve a common problem:
+### Filter and Download
+
+Filters studies for those which used rituximab or ipilimumab then downloads them to the `studies` folder.
+
+*Notes*: `output_dir` is optional. Defaults to `clindb`.
 
 ```{r example}
 library(clinicalomicsdbR)
-## basic filtering
 
-clinicalomicsdbR$new()$filter(drugs=c("paclitaxel"))$study_list[[1]]
+clinicalomicsdbR$new()$filter(drugs = c("ipilimumab", "rituximab"))$download(output_dir = "studies") # downloads all files
 ```
+
+### Filter and Get Data Frame
+
+Filters studies for those which used rituximab or ipilimumab then gets data frame. 
+
+*Notes*: `output_dir` is optional. Defaults to `clindb`.
+
+``` {r}
+library(clinicalomicsdbR)
+
+res <- clinicalomicsdbR$new()$filter(drugs = c("ipilimumab", "rituximab"))$dataframe(); # downloads all files
+
+for (study in res[["study_list"]]) {
+  print(ncol(res[["df"]][[study]]))
+}
+```
+
+<!-- ```{r example} -->
+<!-- library(clinicalomicsdbR) -->
+<!-- ## basic filtering -->
+
+<!-- clinicalomicsdbR$new()$filter(drugs=c("paclitaxel"))$study_list[[1]] -->
+<!-- ``` -->
 

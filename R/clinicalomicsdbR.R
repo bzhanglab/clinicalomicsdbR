@@ -73,6 +73,8 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
   #' @param output_dir Directory to download files to. Default to `clindb`
   #' @return unmodifed clinicalomicsdbR object
   download = function(output_dir = "clindb") {
+    cidr <- getwd()
+    dir.create(file.path(cidr, output_dir), recursive = TRUE, showWarnings = FALSE)
     for (study_id in self$study_list) {
       dl_url <- self$get_download_url(study_id)
       print(paste0("Downloading study ", study_id, " from ", dl_url))
@@ -87,6 +89,8 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
   #' @param output_dir Directory to download files to. Default to `clindb`
   #' @return unmodifed clinicalomicsdbR object
   download_from_id = function(study_id, output_dir = "clindb") {
+    cidr <- getwd()
+    dir.create(file.path(cidr, output_dir), recursive = TRUE, showWarnings = FALSE)
     dl_url <- self$get_download_url(study_id)
     print(paste0("Downloading study ", study_id, " from ", dl_url))
     download.file(dl_url, paste0(output_dir, "/", study_id))
@@ -95,7 +99,7 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
   },
   #' @description
   #' Get all files of the studies in `self$study_list` and load into data frame. Use `filter` function first.
-  #' @return list with `study_list` element to display all studies and list `df` with each dataframe in the list 
+  #' @return list with `study_list` element to display all studies and list `df` with each dataframe in the list
   dataframe = function() {
     res <- list(study_list = self$study_list, df = list())
     for (study in self$study_list) {

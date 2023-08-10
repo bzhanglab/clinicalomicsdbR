@@ -19,43 +19,55 @@ You can install the development version of clinicalomicsdbR from
 devtools::install_github("bzhanglab/clinicalomicsdbR")
 ```
 
-## Example
+## Examples
 
-This is a basic example which shows you how to solve a common problem:
+### Filter and Download
+
+Filters studies for those which used rituximab or ipilimumab then
+downloads them to the `studies` folder.
+
+*Notes*: `output_dir` is optional. Defaults to `clindb`.
 
 ``` r
 library(clinicalomicsdbR)
-## basic filtering
 
-clinicalomicsdbR$new()$filter(drugs=c("paclitaxel"))$study_list[[1]]
-#> [1] "[\"paclitaxel\"]"
-#>  [1] "GSE194040_Paclitaxel_AMG386.csv"                
-#>  [2] "GSE194040_Paclitaxel_Pertuzumab_Trastuzumab.csv"
-#>  [3] "GSE194040_Paclitaxel.csv"                       
-#>  [4] "GSE51373.csv"                                   
-#>  [5] "GSE164458_carboplatin_paclitaxel.csv"           
-#>  [6] "GSE165252.csv"                                  
-#>  [7] "GSE194040_Paclitaxel_Pembrolizumab.csv"         
-#>  [8] "GSE25065.csv"                                   
-#>  [9] "GSE66305_lapatinib.csv"                         
-#> [10] "GSE25055.csv"                                   
-#> [11] "GSE66305_trastuzumab_lapatinib.csv"             
-#> [12] "GSE194040_Paclitaxel_AMG386_Trastuzumab.csv"    
-#> [13] "GSE66305_trastuzumab.csv"                       
-#> [14] "GSE194040_Paclitaxel_ABT888_carboplatin.csv"    
-#> [15] "GSE194040_Paclitaxel_Neratinib.csv"             
-#> [16] "GSE194040_Paclitaxel_Trastuzumab.csv"           
-#> [17] "GSE164458_veliparib_carboplatin_paclitaxel.csv" 
-#> [18] "GSE194040_Paclitaxel_MK_2206.csv"               
-#> [19] "GSE194040_T_DM1_Pertuzumab.csv"                 
-#> [20] "GSE20194.csv"                                   
-#> [21] "GSE25066.csv"                                   
-#> [22] "GSE41998_Paclitaxel.csv"                        
-#> [23] "GSE194040_Paclitaxel_Ganetespib.csv"            
-#> [24] "GSE194040_Paclitaxel_MK_2206_Trastuzumab.csv"   
-#> [25] "GSE14764.csv"                                   
-#> [26] "GSE164458_paclitaxel.csv"                       
-#> [27] "GSE194040_Paclitaxel_Ganitumab.csv"             
-#> [1] "Filtered to 27 studies."
-#> [1] "GSE194040_Paclitaxel_AMG386.csv"
+clinicalomicsdbR$new()$filter(drugs = c("ipilimumab", "rituximab"))$download(output_dir = "studies") # downloads all files
+#> [1] "Filtered to 4 studies."
+#> [1] "Downloading study Gide_Cell_2019_pembro_ipi.csv from https://bcm.box.com/shared/static/swf5fywqcqmf75600g7v8irt2a9agnqo.csv"
+#> [1] "Downloading study VanAllen_antiCTLA4_2015.csv from https://bcm.box.com/shared/static/v0sphd7ht487qk96xbwjokgkbkjpexom.csv"
+#> [1] "Downloading study Gide_Cell_2019_nivo_ipi.csv from https://bcm.box.com/shared/static/jwv108f6cy4kvyeqer95jdugla53m1zt.csv"
+#> [1] "Downloading study GSE35935.csv from https://bcm.box.com/shared/static/8icr4i6gbbp6lgd01iscbss4v7lnj6c5.csv"
+#> [1] "Downloaded 4 studies."
 ```
+
+### Filter and Get Data Frame
+
+Filters studies for those which used rituximab or ipilimumab then gets
+data frame.
+
+*Notes*: `output_dir` is optional. Defaults to `clindb`.
+
+``` r
+library(clinicalomicsdbR)
+
+res <- clinicalomicsdbR$new()$filter(drugs = c("ipilimumab", "rituximab"))$dataframe(); # downloads all files
+#> [1] "Filtered to 4 studies."
+#> [1] "Getting dataframe of study Gide_Cell_2019_pembro_ipi.csv from https://bcm.box.com/shared/static/swf5fywqcqmf75600g7v8irt2a9agnqo.csv"
+#> [1] "Getting dataframe of study VanAllen_antiCTLA4_2015.csv from https://bcm.box.com/shared/static/v0sphd7ht487qk96xbwjokgkbkjpexom.csv"
+#> [1] "Getting dataframe of study Gide_Cell_2019_nivo_ipi.csv from https://bcm.box.com/shared/static/jwv108f6cy4kvyeqer95jdugla53m1zt.csv"
+#> [1] "Getting dataframe of study GSE35935.csv from https://bcm.box.com/shared/static/8icr4i6gbbp6lgd01iscbss4v7lnj6c5.csv"
+
+for (study in res[["study_list"]]) {
+  print(ncol(res[["df"]][[study]]))
+}
+#> [1] 15194
+#> [1] 15059
+#> [1] 17145
+#> [1] 20321
+```
+
+<!-- ```{r example} -->
+<!-- library(clinicalomicsdbR) -->
+<!-- ## basic filtering -->
+<!-- clinicalomicsdbR$new()$filter(drugs=c("paclitaxel"))$study_list[[1]] -->
+<!-- ``` -->
