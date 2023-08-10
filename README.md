@@ -19,6 +19,22 @@ You can install the development version of clinicalomicsdbR from
 devtools::install_github("bzhanglab/clinicalomicsdbR")
 ```
 
+## Functions
+
+- `new()` - Create new clinicalomicsdbR object. Needed before any other
+  function
+- `filter(drugs, cancers)` - filters studies matching provided
+  arugments. `drugs` is a list and can be individual drugs or
+  combinations. See the ClinicalOmicsDB website for all options.
+  `cancers` can contain multiple cancers.
+- `download(output_dir)` - downloads all studies from `filter()` into
+  `output_dir`. `output_dir` is optional, and defaults to `clindb`
+- `dataframe()` - loads all the studies from `filter()` into a
+  list, with column `study_list` that contains the names of the
+  studies and `df` that contains a list of the study data information.
+
+See the examples below for more information on how to use.
+
 ## Examples
 
 ### Filter and Download
