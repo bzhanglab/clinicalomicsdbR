@@ -4,11 +4,15 @@
 # clinicalomicsdbR
 
 <!-- badges: start -->
+
+[![Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.8239444.svg)](https://doi.org/10.5281/zenodo.8239444)
 <!-- badges: end -->
 
-R package to interface with the ClinicalOmicsDB API. Can be used to download data for your own analysis, or directly load study information into a dataframe for exploration.
+R package to interface with the ClinicalOmicsDB API. Can be used to
+download data for your own analysis, or directly load study information
+into a dataframe for exploration.
 
-Designed with the structure from https://r-pkgs.org/.
+Designed with the structure from <https://r-pkgs.org/>.
 
 ## Installation
 
