@@ -18,7 +18,9 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-R package to interface with the ClinicalOmicsDB API. Designed with the structure from https://r-pkgs.org/.
+R package to interface with the ClinicalOmicsDB API. Can be used to download data for your own analysis, or directly load study information into a dataframe for exploration.
+
+Designed with the structure from https://r-pkgs.org/.
 
 ## Installation
 
@@ -29,12 +31,28 @@ You can install the development version of clinicalomicsdbR from [GitHub](https:
 devtools::install_github("bzhanglab/clinicalomicsdbR")
 ```
 
+See Examples below to see how to use.
+
+## Parameters
+
+- `hostname` - base URL of the website containing the ClinicalOmicsDB API. Only change if you are running a custom service.
+- `study_list` - list containing all the studies that were filtered by the `filter()` function.
+
 ## Functions
 
-- `new()` - Create new clinicalomicsdbR object. Needed before any other function
-- `filter(drugs, cancers)` - filters studies matching provided arugments. `drugs` is a list and can be individual drugs or combinations. See the ClinicalOmicsDB website for all options. `cancers` can contain multiple cancers.
-- `download(output_dir)` - downloads all studies from `filter()` into `output_dir`. `output_dir` is optional, and defaults to `clindb`
-- `dataframe()` - loads all the studies from `filter()` into a dataframe, with column `study_list` that contains the names of the studies and `df` that contains a list of the study data information.
+- `new()` - Create new clinicalomicsdbR object. Needed before any other
+  function
+- `filter(drugs, cancers)` - filters studies matching provided
+  arugments. `drugs` is a list and can be individual drugs or
+  combinations. See the ClinicalOmicsDB website for all options.
+  `cancers` can contain multiple cancers.
+- `download(output_dir)` - downloads all studies from `filter()` into
+  `output_dir`. `output_dir` is optional, and defaults to `clindb`
+- `dataframe()` - loads all the studies from `filter()` into a
+  list, with column `study_list` that contains the names of the
+  studies and `df` that contains a list of the study data information.
+- `dataframe_from_id(study_id)` - loads a study with id from `study_id` into a dataframe
+- `downlaod_from_id(study_id, output_dir)` - downsloads a study with id from `study_id` into a folder `output_dir`. `output_dir` defaults to `clindb`
 
 See the examples below for more information on how to use.
 
