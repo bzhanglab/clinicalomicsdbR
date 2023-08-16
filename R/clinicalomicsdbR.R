@@ -7,7 +7,7 @@ library(R6)
 #' @export
 clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
   #' @field hostname The url of the API to connect to. Only change if you are using a custom service.
-  hostname = "http://clinicalomicsdb.zhang-lab.org",
+  hostname = "http://trials.linkedomics.org",
   #' @field study_list The list of all the studies that are a result of filtering.
   study_list = c(),
   #' @description
