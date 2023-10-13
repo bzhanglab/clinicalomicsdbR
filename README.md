@@ -48,7 +48,7 @@ See Examples below to see how to use.
   `df` that contains a list of the study data information.
 - `dataframe_from_id(study_id)` - loads a study with id from `study_id`
   into a dataframe
-- `downlaod_from_id(study_id, output_dir)` - downsloads a study with id
+- `downlaod_from_id(study_id, output_dir)` - downloads a study with id
   from `study_id` into a folder `output_dir`. `output_dir` defaults to
   `clindb`
 
