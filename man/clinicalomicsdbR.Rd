@@ -3,10 +3,16 @@
 \name{clinicalomicsdbR}
 \alias{clinicalomicsdbR}
 \title{clinicalomicsdbR object}
+\value{
+Returns a new clinicalomicsdbR object
+}
 \description{
 clinicalomicsdbR object
 
 clinicalomicsdbR object
+}
+\examples{
+clinicalomicsdbR$new()$filter(drugs = c("ipilimumab", "rituximab"))$study_list # downloads all files
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}

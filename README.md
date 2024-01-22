@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.8239444.svg)](https://doi.org/10.5281/zenodo.8239444)
+[![Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.8239443.svg)](https://doi.org/10.5281/zenodo.8239443)
 <!-- badges: end -->
 
 R package to interface with the ClinicalOmicsDB API. Can be used to

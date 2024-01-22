@@ -1,9 +1,12 @@
-library(httr2)
-library(R6)
-
 #' clinicalomicsdbR object
-#' @import httr2
-#' @import R6
+#' @importFrom httr2 request req_perform req_method req_headers req_body_raw resp_body_json
+#' @importFrom R6 R6Class
+#' @importFrom utils download.file
+#' @importFrom jsonlite fromJSON toJSON
+#' @importFrom dplyr %>%
+#' @return Returns a new clinicalomicsdbR object
+#' @examples
+#' clinicalomicsdbR$new()$filter(drugs = c("ipilimumab", "rituximab"))$study_list # downloads all files
 #' @export
 clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
   #' @field hostname The url of the API to connect to. Only change if you are using a custom service.

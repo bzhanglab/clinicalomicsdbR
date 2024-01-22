@@ -1,2 +1,6 @@
 ^LICENSE\.md$
 ^README\.Rmd$
+^cran-comments\.md$
+^man\figures\.gitkeep$
+^studies$
+^CITATION\.cff$
