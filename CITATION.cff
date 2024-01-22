@@ -8,6 +8,30 @@ message: >-
   metadata from this file.
 type: software
 authors:
+  - given-names: John Michael
+    family-names: Elizarraras
+    affiliation: Baylor College of Medicine
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.8239443
+    description: Zenodo DOI
+repository-code: 'https://github.com/bzhanglab/clinicalomicsdbR'
+url: 'http://trials.linkedomics.org/'
+repository: 'https://zenodo.org/records/8252813'
+abstract: >-
+  Provides an interface to the ClinicalOmicsDB API, allowing
+  for easy data downloading and importing. ClinicalOmicsDB
+  is a database of clinical and omics data from cancer
+  patients. The database is accessible at
+  <http://trials.linkedomics.org>.
+keywords:
+  - bioinformatics
+  - omics
+  - biology
+license: MIT
+preferred-citation:
+  type: article
+  authors:
   - given-names: Chang In
     family-names: Moon
     affiliation: Baylor College of Medicine
@@ -23,42 +47,12 @@ authors:
   - given-names: Bing
     family-names: Zhang
     affiliation: Baylor College of Medicine
-identifiers:
-  - type: doi
-    value: 10.1093/nar/gkad871
-    description: NAR Database Issue
-repository-code: 'https://github.com/bzhanglab/clinicalomicsdbR'
-url: 'http://trials.linkedomics.org/'
-repository: 'https://zenodo.org/records/8252813'
-abstract: >-
-  Matching patients to optimal treatment is challenging, in
-  part due to the limited availability of real-world
-  clinical datasets for predictive biomarker identification.
-  The growing integration of omics profiling into clinical
-  trials presents a new opportunity to tackle this
-  challenge. Here, we introduce ClinicalOmicsDB, a web
-  application for exploring molecular associations of
-  oncology drug responses in clinical trials. This database
-  includes transcriptomic data from 40 clinical trial
-  studies, with 5913 patients spanning 11 cancer types.
-  These studies include 67 treatment arms with a variety of
-  chemotherapy, targeted therapy and immunotherapy drugs,
-  and their combinations, which we organize based on an
-  established ontology for easier navigation. The web
-  application provides users with three options to explore
-  molecular associations of oncology drug responses,
-  focusing on studies, treatments or genes, respectively.
-  Gene set analysis further connects treatment response to
-  pathway activity and tumor microenvironment attributes.
-  The user-friendly web interface of ClinicalOmicsDB
-  streamlines interactive analysis. A Rust-based backend
-  speeds up response time, and application programming
-  interfaces and an R package enable programmatic access. We
-  use three case studies to demonstrate the utility of this
-  resource in human cancer studies. ClinicalOmicsDB is
-  freely available at http://trials.linkedomics.org.
-keywords:
-  - bioinformatics
-  - omics
-  - biology
-license: MIT
+  doi: 10.1093/nar/gkad871
+  journal: "Nucleic Acids Research"
+  month: 1
+  start: 1 # First page number
+  end: 9 # Last page number
+  title: "ClinicalOmicsDB: exploring molecular associations of oncology drug responses in clinical trials"
+  issue: D1
+  volume: 52
+  year: 2024
