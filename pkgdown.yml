@@ -1,0 +1,9 @@
+pandoc: 2.19.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles: {}
+last_built: 2024-01-22T23:33Z
+urls:
+  reference: https://bzhanglab.github.io/clinicalomicsdbR/reference
+  article: https://bzhanglab.github.io/clinicalomicsdbR/articles
+
