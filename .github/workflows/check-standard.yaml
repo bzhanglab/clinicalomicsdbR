@@ -29,15 +29,6 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - name: Install stable toolchain
-        if: ${{startsWith(matrix.config.os, 'windows')}}
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          target: x86_64-pc-windows-msvc
-          profile: minimal
-          default: true
-
       - uses: actions/checkout@v3
 
       - uses: r-lib/actions/setup-pandoc@v2

@@ -4,3 +4,6 @@
 ^man\figures\.gitkeep$
 ^studies$
 ^CITATION\.cff$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

@@ -50,8 +50,6 @@ preferred-citation:
   doi: 10.1093/nar/gkad871
   journal: "Nucleic Acids Research"
   month: 1
-  start: 1 # First page number
-  end: 9 # Last page number
   title: "ClinicalOmicsDB: exploring molecular associations of oncology drug responses in clinical trials"
   issue: D1
   volume: 52
