@@ -10,7 +10,7 @@
 #' @export
 clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
   #' @field hostname The url of the API to connect to. Only change if you are using a custom service.
-  hostname = "http://trials.linkedomics.org",
+  hostname = "https://trials.linkedomics.org",
   #' @field study_list The list of all the studies that are a result of filtering.
   study_list = c(),
   #' @description
@@ -95,10 +95,22 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
     cidr <- getwd()
     dir.create(file.path(cidr, output_dir), recursive = TRUE, showWarnings = FALSE)
     dl_url <- self$get_download_url(study_id)
-    print(paste0("Downloading study ", study_id, " from ", dl_url))
-    download.file(dl_url, paste0(output_dir, "/", study_id))
-    print("Done downloading study.")
-    invisible(self)
+    tryCatch(
+      {
+        print(paste0("Downloading study ", study_id, " from ", dl_url))
+        download.file(dl_url, paste0(output_dir, "/", study_id))
+        print("Done downloading study.")
+        invisible(self)
+      },
+      error = function(err) {
+        print(paste0("Error fetching study with ID: ", study_id, ".\nVerify ID is correct or change hostname."))
+        stop(paste0("Could not fetch study: ", study_id))
+      },
+      warning = function(warn) {
+        print(paste0("Warning fetching study with ID: ", study_id, ".\nVerify ID is correct or change hostname."))
+        warn(paste0("Warning with study: ", study_id))
+      }
+    )
   },
   #' @description
   #' Get all files of the studies in `self$study_list` and load into data frame. Use `filter` function first.
@@ -115,8 +127,20 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
   #' @param study_id String containing the ID of the study to get dataframe of
   #' @return data frame containing data of study
   dataframe_from_id = function(study_id) {
-    dl_url <- self$get_download_url(study_id)
-    print(paste0("Getting dataframe of study ", study_id, " from ", dl_url))
-    return(read.csv(dl_url))
+    tryCatch(
+      {
+        dl_url <- self$get_download_url(study_id)
+        print(paste0("Getting dataframe of study ", study_id, " from ", dl_url))
+        return(read.csv(dl_url))
+      },
+      error = function(err) {
+        print(paste0("Error fetching study with ID: ", study_id, ".\nVerify ID is correct or change hostname."))
+        stop(paste0("Could not fetch study: ", study_id))
+      },
+      warning = function(warn) {
+        print(paste0("Warning fetching study with ID: ", study_id, ".\nVerify ID is correct or change hostname."))
+        warn(paste0("Warning with study: ", study_id))
+      }
+    )
   }
 ))
