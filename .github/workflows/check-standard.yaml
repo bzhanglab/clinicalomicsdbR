@@ -29,6 +29,32 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
+      - name: Add custom certificate to trusted store
+        if: matrix.config.os == 'ubuntu-latest'
+        run: |
+          sudo apt install --only-upgrade ca-certificates
+          sudo apt install --only-upgrade openssl
+          # Download or access the certificate
+           echo "${{ secrets.CERT_CHAIN }}" > website_cert_chain.pem
+           sudo curl -k https://letsencrypt.org/certs/isrgrootx1.pem.txt -o /usr/local/share/ca-certificates/isrgrootx1.crt
+          sudo curl -k https://letsencrypt.org/certs/letsencryptauthorityx1.pem.txt -o /usr/local/share/ca-certificates/letsencryptauthorityx1.crt
+          sudo curl -k https://letsencrypt.org/certs/letsencryptauthorityx2.pem.txt -o /usr/local/share/ca-certificates/letsencryptauthorityx2.crt
+          sudo curl -k https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem.txt -o /usr/local/share/ca-certificates/letsencryptx1.crt
+          sudo curl -k https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.pem.txt -o /usr/local/share/ca-certificates/letsencryptx2.crt
+          sudo curl -k https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem.txt -o /usr/local/share/ca-certificates/letsencryptx3.crt
+          sudo curl -k https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.pem.txt -o /usr/local/share/ca-certificates/letsencryptx4.crt
+
+          sudo dpkg-reconfigure ca-certificates
+  
+          # Add the certificate to the system's trusted certificates
+          sudo cp website_cert_chain.pem /usr/local/share/ca-certificates/website_cert_chain.crt
+          sudo update-ca-certificates
+          sudo dpkg-reconfigure ca-certificates
+          # Verify the certificate is trusted
+          # openssl verify /usr/local/share/ca-certificates/website_cert_chain.crt
+          
+        shell: bash
+      
       - uses: actions/checkout@v3
 
       - uses: r-lib/actions/setup-pandoc@v2
