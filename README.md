@@ -16,6 +16,12 @@ Designed with the structure from <https://r-pkgs.org/>.
 
 ## Installation
 
+To install the latest stable release, run
+
+``` r
+install.packages("clinicalomicsdbR")
+```
+
 You can install the development version of clinicalomicsdbR from
 [GitHub](https://github.com/) with:
 
@@ -48,7 +54,7 @@ See Examples below to see how to use.
   `df` that contains a list of the study data information.
 - `dataframe_from_id(study_id)` - loads a study with id from `study_id`
   into a dataframe
-- `downlaod_from_id(study_id, output_dir)` - downloads a study with id
+- `downlaod_from_id(study_id, output_dir)` - downsloads a study with id
   from `study_id` into a folder `output_dir`. `output_dir` defaults to
   `clindb`
 
@@ -100,9 +106,3 @@ for (study in res[["study_list"]]) {
 #> [1] 17145
 #> [1] 20321
 ```
-
-<!-- ```{r example} -->
-<!-- library(clinicalomicsdbR) -->
-<!-- ## basic filtering -->
-<!-- clinicalomicsdbR$new()$filter(drugs=c("paclitaxel"))$study_list[[1]] -->
-<!-- ``` -->

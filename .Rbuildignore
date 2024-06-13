@@ -7,3 +7,6 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^\.github$
+^man\\figures\.gitkeep$
+^man/figures/\.gitkeep$

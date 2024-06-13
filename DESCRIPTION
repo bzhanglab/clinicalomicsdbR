@@ -2,10 +2,11 @@ Package: clinicalomicsdbR
 Title: Interface with the ClinicalOmicsDB API, Allowing for Easy Data Downloading and Importing
 Version: 1.0.4
 Authors@R: 
-    person("John", "Elizarraras", , "john.elizarraras@bcm.edu", role = c("aut", "cre"))
+    person("John", "Elizarraras", , "john.elizarraras@bcm.edu", role = c("aut", "cre", "ctb"))
 Description: Provides an interface to the ClinicalOmicsDB API, allowing for easy data downloading and importing. ClinicalOmicsDB is a database of clinical and omics data from cancer patients. The database is accessible at <http://trials.linkedomics.org>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: httr2, R6, dplyr, utils, jsonlite
+BugReports: https://github.com/bzhanglab/clinicalomicsdbR/issues/new
