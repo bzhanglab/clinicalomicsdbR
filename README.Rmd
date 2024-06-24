@@ -59,7 +59,7 @@ See Examples below to see how to use.
   list, with column `study_list` that contains the names of the
   studies and `df` that contains a list of the study data information.
 - `dataframe_from_id(study_id)` - loads a study with id from `study_id` into a dataframe
-- `downlaod_from_id(study_id, output_dir)` - downsloads a study with id from `study_id` into a folder `output_dir`.
+- `download_from_id(study_id, output_dir)` - downsloads a study with id from `study_id` into a folder `output_dir`.
 See the examples below for more information on how to use.
 
 ## Examples
