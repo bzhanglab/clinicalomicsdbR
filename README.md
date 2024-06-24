@@ -48,17 +48,15 @@ See Examples below to see how to use.
   combinations. See the ClinicalOmicsDB website for all options.
   `cancers` can contain multiple cancers.
 - `download(output_dir)` - downloads all studies from `filter()` into
-  `output_dir`. `output_dir` is optional, and defaults to `clindb`
+  `output_dir`.
 - `dataframe()` - loads all the studies from `filter()` into a list,
   with column `study_list` that contains the names of the studies and
   `df` that contains a list of the study data information.
 - `dataframe_from_id(study_id)` - loads a study with id from `study_id`
   into a dataframe
-- `downlaod_from_id(study_id, output_dir)` - downsloads a study with id
-  from `study_id` into a folder `output_dir`. `output_dir` defaults to
-  `clindb`
-
-See the examples below for more information on how to use.
+- `download_from_id(study_id, output_dir)` - downsloads a study with id
+  from `study_id` into a folder `output_dir`. See the examples below for
+  more information on how to use.
 
 ## Examples
 
@@ -67,18 +65,16 @@ See the examples below for more information on how to use.
 Filters studies for those which used rituximab or ipilimumab then
 downloads them to the `studies` folder.
 
-*Notes*: `output_dir` is optional. Defaults to `clindb`.
-
 ``` r
 library(clinicalomicsdbR)
 
-clinicalomicsdbR$new()$filter(drugs = c("ipilimumab", "rituximab"))$download(output_dir = "studies") # downloads all files
-#> [1] "Filtered to 4 studies."
-#> [1] "Downloading study Gide_Cell_2019_pembro_ipi.csv from https://bcm.box.com/shared/static/swf5fywqcqmf75600g7v8irt2a9agnqo.csv"
-#> [1] "Downloading study VanAllen_antiCTLA4_2015.csv from https://bcm.box.com/shared/static/v0sphd7ht487qk96xbwjokgkbkjpexom.csv"
-#> [1] "Downloading study Gide_Cell_2019_nivo_ipi.csv from https://bcm.box.com/shared/static/jwv108f6cy4kvyeqer95jdugla53m1zt.csv"
-#> [1] "Downloading study GSE35935.csv from https://bcm.box.com/shared/static/8icr4i6gbbp6lgd01iscbss4v7lnj6c5.csv"
-#> [1] "Downloaded 4 studies."
+clinicalomicsdbR$new()$filter(drugs = c("ipilimumab", "rituximab"))$download(output_dir = tempdir()) # downloads all files
+#> Filtered to 4 studies.
+#> Downloading study Gide_Cell_2019_pembro_ipi.csv from https://bcm.box.com/shared/static/swf5fywqcqmf75600g7v8irt2a9agnqo.csv
+#> Downloading study VanAllen_antiCTLA4_2015.csv from https://bcm.box.com/shared/static/v0sphd7ht487qk96xbwjokgkbkjpexom.csv
+#> Downloading study Gide_Cell_2019_nivo_ipi.csv from https://bcm.box.com/shared/static/jwv108f6cy4kvyeqer95jdugla53m1zt.csv
+#> Downloading study GSE35935.csv from https://bcm.box.com/shared/static/8icr4i6gbbp6lgd01iscbss4v7lnj6c5.csv
+#> Downloaded 4 studies.
 ```
 
 ### Filter and Get Data Frame
@@ -92,11 +88,14 @@ data frame.
 library(clinicalomicsdbR)
 
 res <- clinicalomicsdbR$new()$filter(drugs = c("ipilimumab", "rituximab"))$dataframe(); # downloads all files
-#> [1] "Filtered to 4 studies."
-#> [1] "Getting dataframe of study Gide_Cell_2019_pembro_ipi.csv from https://bcm.box.com/shared/static/swf5fywqcqmf75600g7v8irt2a9agnqo.csv"
-#> [1] "Getting dataframe of study VanAllen_antiCTLA4_2015.csv from https://bcm.box.com/shared/static/v0sphd7ht487qk96xbwjokgkbkjpexom.csv"
-#> [1] "Getting dataframe of study Gide_Cell_2019_nivo_ipi.csv from https://bcm.box.com/shared/static/jwv108f6cy4kvyeqer95jdugla53m1zt.csv"
-#> [1] "Getting dataframe of study GSE35935.csv from https://bcm.box.com/shared/static/8icr4i6gbbp6lgd01iscbss4v7lnj6c5.csv"
+#> Filtered to 4 studies.
+#> Getting dataframe of study Gide_Cell_2019_pembro_ipi.csv from https://bcm.box.com/shared/static/swf5fywqcqmf75600g7v8irt2a9agnqo.csv
+#> Getting dataframe of study VanAllen_antiCTLA4_2015.csv from https://bcm.box.com/shared/static/v0sphd7ht487qk96xbwjokgkbkjpexom.csv
+#> Getting dataframe of study Gide_Cell_2019_nivo_ipi.csv from https://bcm.box.com/shared/static/jwv108f6cy4kvyeqer95jdugla53m1zt.csv
+#> Getting dataframe of study GSE35935.csv from https://bcm.box.com/shared/static/8icr4i6gbbp6lgd01iscbss4v7lnj6c5.csv
+```
+
+``` r
 
 for (study in res[["study_list"]]) {
   print(ncol(res[["df"]][[study]]))

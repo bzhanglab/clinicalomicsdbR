@@ -10,3 +10,4 @@
 ^\.github$
 ^man\\figures\.gitkeep$
 ^man/figures/\.gitkeep$
+^CRAN-SUBMISSION$
