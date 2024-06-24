@@ -98,17 +98,14 @@
 <li>
 <code>filter(drugs, cancers)</code> - filters studies matching provided arugments. <code>drugs</code> is a list and can be individual drugs or combinations. See the ClinicalOmicsDB website for all options. <code>cancers</code> can contain multiple cancers.</li>
 <li>
-<code>download(output_dir)</code> - downloads all studies from <code><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter()</a></code> into <code>output_dir</code>. <code>output_dir</code> is optional, and defaults to <code>clindb</code>
-</li>
+<code>download(output_dir)</code> - downloads all studies from <code><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter()</a></code> into <code>output_dir</code>.</li>
 <li>
 <code>dataframe()</code> - loads all the studies from <code><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter()</a></code> into a list, with column <code>study_list</code> that contains the names of the studies and <code>df</code> that contains a list of the study data information.</li>
 <li>
 <code>dataframe_from_id(study_id)</code> - loads a study with id from <code>study_id</code> into a dataframe</li>
 <li>
-<code>downlaod_from_id(study_id, output_dir)</code> - downsloads a study with id from <code>study_id</code> into a folder <code>output_dir</code>. <code>output_dir</code> defaults to <code>clindb</code>
-</li>
+<code>download_from_id(study_id, output_dir)</code> - downsloads a study with id from <code>study_id</code> into a folder <code>output_dir</code>. See the examples below for more information on how to use.</li>
 </ul>
-<p>See the examples below for more information on how to use.</p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -117,17 +114,16 @@
 <h3 id="filter-and-download">Filter and Download<a class="anchor" aria-label="anchor" href="#filter-and-download"></a>
 </h3>
 <p>Filters studies for those which used rituximab or ipilimumab then downloads them to the <code>studies</code> folder.</p>
-<p><em>Notes</em>: <code>output_dir</code> is optional. Defaults to <code>clindb</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">clinicalomicsdbR</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va"><a href="reference/clinicalomicsdbR.html">clinicalomicsdbR</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">filter</span><span class="op">(</span>drugs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ipilimumab"</span>, <span class="st">"rituximab"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="fu">download</span><span class="op">(</span>output_dir <span class="op">=</span> <span class="st">"studies"</span><span class="op">)</span> <span class="co"># downloads all files</span></span>
-<span><span class="co">#&gt; [1] "Filtered to 4 studies."</span></span>
-<span><span class="co">#&gt; [1] "Downloading study Gide_Cell_2019_pembro_ipi.csv from https://bcm.box.com/shared/static/swf5fywqcqmf75600g7v8irt2a9agnqo.csv"</span></span>
-<span><span class="co">#&gt; [1] "Downloading study VanAllen_antiCTLA4_2015.csv from https://bcm.box.com/shared/static/v0sphd7ht487qk96xbwjokgkbkjpexom.csv"</span></span>
-<span><span class="co">#&gt; [1] "Downloading study Gide_Cell_2019_nivo_ipi.csv from https://bcm.box.com/shared/static/jwv108f6cy4kvyeqer95jdugla53m1zt.csv"</span></span>
-<span><span class="co">#&gt; [1] "Downloading study GSE35935.csv from https://bcm.box.com/shared/static/8icr4i6gbbp6lgd01iscbss4v7lnj6c5.csv"</span></span>
-<span><span class="co">#&gt; [1] "Downloaded 4 studies."</span></span></code></pre></div>
+<span><span class="va"><a href="reference/clinicalomicsdbR.html">clinicalomicsdbR</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">filter</span><span class="op">(</span>drugs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ipilimumab"</span>, <span class="st">"rituximab"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="fu">download</span><span class="op">(</span>output_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># downloads all files</span></span>
+<span><span class="co">#&gt; Filtered to 4 studies.</span></span>
+<span><span class="co">#&gt; Downloading study Gide_Cell_2019_pembro_ipi.csv from https://bcm.box.com/shared/static/swf5fywqcqmf75600g7v8irt2a9agnqo.csv</span></span>
+<span><span class="co">#&gt; Downloading study VanAllen_antiCTLA4_2015.csv from https://bcm.box.com/shared/static/v0sphd7ht487qk96xbwjokgkbkjpexom.csv</span></span>
+<span><span class="co">#&gt; Downloading study Gide_Cell_2019_nivo_ipi.csv from https://bcm.box.com/shared/static/jwv108f6cy4kvyeqer95jdugla53m1zt.csv</span></span>
+<span><span class="co">#&gt; Downloading study GSE35935.csv from https://bcm.box.com/shared/static/8icr4i6gbbp6lgd01iscbss4v7lnj6c5.csv</span></span>
+<span><span class="co">#&gt; Downloaded 4 studies.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="filter-and-get-data-frame">Filter and Get Data Frame<a class="anchor" aria-label="anchor" href="#filter-and-get-data-frame"></a>
@@ -138,12 +134,13 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">clinicalomicsdbR</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/clinicalomicsdbR.html">clinicalomicsdbR</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="fu">filter</span><span class="op">(</span>drugs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ipilimumab"</span>, <span class="st">"rituximab"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="fu">dataframe</span><span class="op">(</span><span class="op">)</span>; <span class="co"># downloads all files</span></span>
-<span><span class="co">#&gt; [1] "Filtered to 4 studies."</span></span>
-<span><span class="co">#&gt; [1] "Getting dataframe of study Gide_Cell_2019_pembro_ipi.csv from https://bcm.box.com/shared/static/swf5fywqcqmf75600g7v8irt2a9agnqo.csv"</span></span>
-<span><span class="co">#&gt; [1] "Getting dataframe of study VanAllen_antiCTLA4_2015.csv from https://bcm.box.com/shared/static/v0sphd7ht487qk96xbwjokgkbkjpexom.csv"</span></span>
-<span><span class="co">#&gt; [1] "Getting dataframe of study Gide_Cell_2019_nivo_ipi.csv from https://bcm.box.com/shared/static/jwv108f6cy4kvyeqer95jdugla53m1zt.csv"</span></span>
-<span><span class="co">#&gt; [1] "Getting dataframe of study GSE35935.csv from https://bcm.box.com/shared/static/8icr4i6gbbp6lgd01iscbss4v7lnj6c5.csv"</span></span>
-<span></span>
+<span><span class="co">#&gt; Filtered to 4 studies.</span></span>
+<span><span class="co">#&gt; Getting dataframe of study Gide_Cell_2019_pembro_ipi.csv from https://bcm.box.com/shared/static/swf5fywqcqmf75600g7v8irt2a9agnqo.csv</span></span>
+<span><span class="co">#&gt; Getting dataframe of study VanAllen_antiCTLA4_2015.csv from https://bcm.box.com/shared/static/v0sphd7ht487qk96xbwjokgkbkjpexom.csv</span></span>
+<span><span class="co">#&gt; Getting dataframe of study Gide_Cell_2019_nivo_ipi.csv from https://bcm.box.com/shared/static/jwv108f6cy4kvyeqer95jdugla53m1zt.csv</span></span>
+<span><span class="co">#&gt; Getting dataframe of study GSE35935.csv from https://bcm.box.com/shared/static/8icr4i6gbbp6lgd01iscbss4v7lnj6c5.csv</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">study</span> <span class="kw">in</span> <span class="va">res</span><span class="op">[[</span><span class="st">"study_list"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">res</span><span class="op">[[</span><span class="st">"df"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="va">study</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
