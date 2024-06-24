@@ -55,7 +55,7 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
     resp <- req_perform(req)
     filter_res <- resp %>% resp_body_json()
     self$study_list <- unlist(filter_res$study_list)
-    print(paste0("Filtered to ", length(self$study_list), " studies."))
+    message(paste0("Filtered to ", length(self$study_list), " studies."))
     invisible(self)
   },
   #' @description
@@ -80,10 +80,10 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
     dir.create(file.path(cidr, output_dir), recursive = TRUE, showWarnings = FALSE)
     for (study_id in self$study_list) {
       dl_url <- self$get_download_url(study_id)
-      print(paste0("Downloading study ", study_id, " from ", dl_url))
+      message(paste0("Downloading study ", study_id, " from ", dl_url))
       download.file(dl_url, paste0(output_dir, "/", study_id))
     }
-    print(paste0("Downloaded ", length(self$study_list), " studies."))
+    message(paste0("Downloaded ", length(self$study_list), " studies."))
     invisible(self)
   },
   #' @description
@@ -97,17 +97,17 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
     dl_url <- self$get_download_url(study_id)
     tryCatch(
       {
-        print(paste0("Downloading study ", study_id, " from ", dl_url))
+        message(paste0("Downloading study ", study_id, " from ", dl_url))
         download.file(dl_url, paste0(output_dir, "/", study_id))
-        print("Done downloading study.")
+        message("Done downloading study.")
         invisible(self)
       },
       error = function(err) {
-        print(paste0("Error fetching study with ID: ", study_id, ".\nVerify ID is correct or change hostname."))
+        message(paste0("Error fetching study with ID: ", study_id, ".\nVerify ID is correct or change hostname."))
         stop(paste0("Could not fetch study: ", study_id))
       },
       warning = function(warn) {
-        print(paste0("Warning fetching study with ID: ", study_id, ".\nVerify ID is correct or change hostname."))
+        message(paste0("Warning fetching study with ID: ", study_id, ".\nVerify ID is correct or change hostname."))
         warn(paste0("Warning with study: ", study_id))
       }
     )
@@ -130,15 +130,15 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
     tryCatch(
       {
         dl_url <- self$get_download_url(study_id)
-        print(paste0("Getting dataframe of study ", study_id, " from ", dl_url))
+        message(paste0("Getting dataframe of study ", study_id, " from ", dl_url))
         return(read.csv(dl_url))
       },
       error = function(err) {
-        print(paste0("Error fetching study with ID: ", study_id, ".\nVerify ID is correct or change hostname."))
+        message(paste0("Error fetching study with ID: ", study_id, ".\nVerify ID is correct or change hostname."))
         stop(paste0("Could not fetch study: ", study_id))
       },
       warning = function(warn) {
-        print(paste0("Warning fetching study with ID: ", study_id, ".\nVerify ID is correct or change hostname."))
+        message(paste0("Warning fetching study with ID: ", study_id, ".\nVerify ID is correct or change hostname."))
         warn(paste0("Warning with study: ", study_id))
       }
     )
