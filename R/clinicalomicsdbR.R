@@ -13,6 +13,8 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
   hostname = "https://trials.linkedomics.org",
   #' @field study_list The list of all the studies that are a result of filtering.
   study_list = c(),
+  #' @field verbosity The level of messages wanted for downloads (defaults to 0: No Output). Follows httr2 documentatation for `req_perform`
+  verbosity = 0,
   #' @description
   #' filter objects according to the specified drugs and cancers
   #' @param drugs list or vector containing drugs that studies need to contain at least one of
@@ -52,7 +54,7 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
           \"cancers\": ", cancer_text, "
         }
         "))
-    resp <- req_perform(req)
+    resp <- req_perform(req, verbosity = self$verbosity)
     filter_res <- resp %>% resp_body_json()
     self$study_list <- unlist(filter_res$study_list)
     message(paste0("Filtered to ", length(self$study_list), " studies."))
@@ -67,15 +69,15 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
     req <- req %>%
       req_method("GET") %>%
       req_headers("Accept" = "application/json, text/plain")
-    resp <- req_perform(req)
+    resp <- req_perform(req, verbosity = self$verbosity)
     resp_json <- resp %>% resp_body_json()
     return(resp_json$download_url)
   },
   #' @description
   #' Download all files of the studies in `self$study_list`. Use `filter` function first
-  #' @param output_dir Directory to download files to. Default to `clindb`
+  #' @param output_dir Directory to download files to.
   #' @return unmodifed clinicalomicsdbR object
-  download = function(output_dir = "clindb") {
+  download = function(output_dir) {
     cidr <- getwd()
     dir.create(file.path(cidr, output_dir), recursive = TRUE, showWarnings = FALSE)
     for (study_id in self$study_list) {
@@ -89,9 +91,9 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
   #' @description
   #' Download all file from `study_id` into `output_dir` directory
   #' @param study_id String containing the ID of the study to download
-  #' @param output_dir Directory to download files to. Default to `clindb`
+  #' @param output_dir Directory to download files to.
   #' @return unmodifed clinicalomicsdbR object
-  download_from_id = function(study_id, output_dir = "clindb") {
+  download_from_id = function(study_id) {
     cidr <- getwd()
     dir.create(file.path(cidr, output_dir), recursive = TRUE, showWarnings = FALSE)
     dl_url <- self$get_download_url(study_id)

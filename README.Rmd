@@ -54,13 +54,12 @@ See Examples below to see how to use.
   combinations. See the ClinicalOmicsDB website for all options.
   `cancers` can contain multiple cancers.
 - `download(output_dir)` - downloads all studies from `filter()` into
-  `output_dir`. `output_dir` is optional, and defaults to `clindb`
+  `output_dir`.
 - `dataframe()` - loads all the studies from `filter()` into a
   list, with column `study_list` that contains the names of the
   studies and `df` that contains a list of the study data information.
 - `dataframe_from_id(study_id)` - loads a study with id from `study_id` into a dataframe
-- `downlaod_from_id(study_id, output_dir)` - downsloads a study with id from `study_id` into a folder `output_dir`. `output_dir` defaults to `clindb`
-
+- `downlaod_from_id(study_id, output_dir)` - downsloads a study with id from `study_id` into a folder `output_dir`.
 See the examples below for more information on how to use.
 
 ## Examples
@@ -69,12 +68,10 @@ See the examples below for more information on how to use.
 
 Filters studies for those which used rituximab or ipilimumab then downloads them to the `studies` folder.
 
-*Notes*: `output_dir` is optional. Defaults to `clindb`.
-
 ```{r example}
 library(clinicalomicsdbR)
 
-clinicalomicsdbR$new()$filter(drugs = c("ipilimumab", "rituximab"))$download(output_dir = "studies") # downloads all files
+clinicalomicsdbR$new()$filter(drugs = c("ipilimumab", "rituximab"))$download(output_dir = tempdir()) # downloads all files
 ```
 
 ### Filter and Get Data Frame

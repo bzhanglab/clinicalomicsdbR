@@ -20,6 +20,8 @@ clinicalomicsdbR$new()$filter(drugs = c("ipilimumab", "rituximab"))$study_list #
 \item{\code{hostname}}{The url of the API to connect to. Only change if you are using a custom service.}
 
 \item{\code{study_list}}{The list of all the studies that are a result of filtering.}
+
+\item{\code{verbosity}}{The level of messages wanted for downloads (defaults to 0: No Output). Follows httr2 documentatation for \code{req_perform}}
 }
 \if{html}{\out{</div>}}
 }
@@ -83,13 +85,13 @@ String of the download url
 \subsection{Method \code{download()}}{
 Download all files of the studies in \code{self$study_list}. Use \code{filter} function first
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{clinicalomicsdbR$download(output_dir = "clindb")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{clinicalomicsdbR$download(output_dir)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{output_dir}}{Directory to download files to. Default to \code{clindb}}
+\item{\code{output_dir}}{Directory to download files to.}
 }
 \if{html}{\out{</div>}}
 }
@@ -103,7 +105,7 @@ unmodifed clinicalomicsdbR object
 \subsection{Method \code{download_from_id()}}{
 Download all file from \code{study_id} into \code{output_dir} directory
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{clinicalomicsdbR$download_from_id(study_id, output_dir = "clindb")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{clinicalomicsdbR$download_from_id(study_id)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -111,7 +113,7 @@ Download all file from \code{study_id} into \code{output_dir} directory
 \describe{
 \item{\code{study_id}}{String containing the ID of the study to download}
 
-\item{\code{output_dir}}{Directory to download files to. Default to \code{clindb}}
+\item{\code{output_dir}}{Directory to download files to.}
 }
 \if{html}{\out{</div>}}
 }
