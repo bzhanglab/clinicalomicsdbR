@@ -44,7 +44,7 @@ See Examples below to see how to use.
 - `new()` - Create new clinicalomicsdbR object. Needed before any other
   function
 - `filter(drugs, cancers)` - filters studies matching provided
-  arugments. `drugs` is a list and can be individual drugs or
+  arguments. `drugs` is a list and can be individual drugs or
   combinations. See the ClinicalOmicsDB website for all options.
   `cancers` can contain multiple cancers.
 - `download(output_dir)` - downloads all studies from `filter()` into

@@ -78,8 +78,7 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
   #' @param output_dir Directory to download files to.
   #' @return unmodifed clinicalomicsdbR object
   download = function(output_dir) {
-    cidr <- getwd()
-    dir.create(file.path(cidr, output_dir), recursive = TRUE, showWarnings = FALSE)
+    dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
     for (study_id in self$study_list) {
       dl_url <- self$get_download_url(study_id)
       message(paste0("Downloading study ", study_id, " from ", dl_url))
@@ -94,8 +93,7 @@ clinicalomicsdbR <- R6Class("clinicalomicsdbR", list(
   #' @param output_dir Directory to download files to.
   #' @return unmodifed clinicalomicsdbR object
   download_from_id = function(study_id) {
-    cidr <- getwd()
-    dir.create(file.path(cidr, output_dir), recursive = TRUE, showWarnings = FALSE)
+    dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
     dl_url <- self$get_download_url(study_id)
     tryCatch(
       {
